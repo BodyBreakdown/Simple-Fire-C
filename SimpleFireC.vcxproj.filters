@@ -11,6 +11,6 @@
     <ClInclude Include="src\random_table.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="firetable.png" />
+    <Image Include="res\firetable.png" />
   </ItemGroup>
 </Project>
