@@ -31,7 +31,7 @@ int main()
 
 	Image buffer = GenImageColor(scaledWidth, scaledHeight, BLANK);
 	Texture render = LoadTextureFromImage(buffer);
-	Image colorData = LoadImage("firetable.png");
+	Image colorData = LoadImage("res/firetable.png");
 	
 	Color colorTable[64];
 	
