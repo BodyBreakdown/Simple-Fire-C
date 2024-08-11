@@ -6,6 +6,11 @@
 random_table* random_table_ctor(int size, int min, int max) {
     random_table* table = malloc(sizeof(*table) + sizeof(int) * size);
     
+    if (table == NULL) {
+        fprintf(stderr, "Failed to create table");
+        abort();
+    }
+
     table->length = size;
     table->index = 0;
     SetRandomSeed(510912122);

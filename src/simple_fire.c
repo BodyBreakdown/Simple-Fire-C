@@ -22,6 +22,7 @@ int main()
 	const int bottom = scaledHeight - 1;
 
 	InitWindow(width+1, height+1, "");
+	SetTargetFPS(120);
 
 	random_table* rng1 = random_table_ctor(25, 0, 1);
 	random_table* rng2 = random_table_ctor(25, -1, 1);
@@ -38,7 +39,7 @@ int main()
 	Rectangle srcRec = { 0, 0, scaledWidth, scaledHeight };
 	Rectangle dstRec = { 0, 0, width, height };
 
-	Vector2 zero = { 0,0 };
+	Vector2 zero = { 0, 0 };
 	
 	int rand3;
 	
@@ -98,7 +99,7 @@ int main()
 		BeginDrawing();
 		ClearBackground(BLANK);
 		DrawTexturePro(render, srcRec, dstRec, zero, 0, WHITE);
-		DrawFPS(100, 100);
+		//DrawFPS(100, 100);
 		EndDrawing();
 	}
 
