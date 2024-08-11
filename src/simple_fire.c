@@ -6,6 +6,11 @@
 
 int main()
 {
+	const int width = 1920;
+	const int height = 1080;
+	const int scaledWidth = width / 4;
+	const int scaledHeight = height / 4;
+	const int bottom = scaledHeight - 1;
 
 	SetConfigFlags(
 		FLAG_BORDERLESS_WINDOWED_MODE |
@@ -15,18 +20,13 @@ int main()
 		FLAG_WINDOW_MOUSE_PASSTHROUGH
 	);
 
-	const int width = 1920;
-	const int height = 1080;
-	const int scaledWidth = width / 4;
-	const int scaledHeight = height / 4;
-	const int bottom = scaledHeight - 1;
-
 	InitWindow(width+1, height+1, "");
+
 	SetTargetFPS(120);
 
 	random_table* rng1 = random_table_ctor(25, 0, 1);
 	random_table* rng2 = random_table_ctor(25, -1, 1);
-	random_table* rng3 = random_table_ctor(25, -1, 3);
+	random_table* rng3 = random_table_ctor(25, -1, 2);
 	
 	int* matrix = (int*)calloc(scaledWidth * scaledHeight, sizeof(int));
 
@@ -48,42 +48,33 @@ int main()
 		colorTable[i] = GetImageColor(colorData, i, 0);
 	}
 
-
 	UnloadImage(colorData);
 
 	while (!WindowShouldClose())
 	{
-
 		for (int x = 0; x < scaledWidth; x++)
 		{
 			matrix[(bottom * scaledWidth) + x] = 63;
-			for (int y = 2; y < scaledHeight; y++)
+			for (int y = 60; y < scaledHeight; y++)
 			{
-			
 				int pos = (y * scaledWidth) + x;
 				
-				if (matrix[pos] <= 0) {
+				if (matrix[pos] <= 0)
 					continue;
-				}
-					
-				if (matrix[pos] < 52) {
-					rand3 = next_value(rng1);
-				}
-					
-				else {
+
+				if (matrix[pos] < 58)
+					rand3 = next_value(rng1) + next_value(rng1);
+
+				else
 					rand3 = next_value(rng3);
-				}
 					
 				int mX = x + next_value(rng2);
 				
-				if (mX >= scaledWidth) {
+				if (mX >= scaledWidth) 
 					mX -= scaledWidth;
-				}
-					
-				else if (mX < 0) {
+				
+				else if (mX < 0) 
 					mX += scaledWidth;
-				}
-					
 
 				int nextPos = ((y - next_value(rng1)) * scaledWidth) + mX;
 
