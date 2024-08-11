@@ -3,7 +3,8 @@
 #include "raylib.h"
 #include "raymath.h"
 
-int main(void)
+
+int main()
 {
 
 	SetConfigFlags(
@@ -30,7 +31,7 @@ int main(void)
 
 	Image buffer = GenImageColor(scaledWidth, scaledHeight, BLANK);
 	Texture render = LoadTextureFromImage(buffer);
-	Image colorData = LoadImage("E:/Projects/SimpleFireC/x64/Debug/firetable.png");
+	Image colorData = LoadImage("firetable.png");
 	
 	Color colorTable[64];
 	

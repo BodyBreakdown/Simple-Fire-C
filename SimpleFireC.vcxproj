@@ -127,14 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="random_table.c" />
-    <ClCompile Include="simple_fire.c" />
+    <ClCompile Include="src\random_table.c" />
+    <ClCompile Include="src\simple_fire.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="random_table.h" />
+    <ClInclude Include="src\random_table.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="firetable.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
