@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleFireC", "SimpleFireC.vcxproj", "{688265FF-9C90-41B5-96C6-AA97489819D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Debug|x64.ActiveCfg = Debug|x64
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Debug|x64.Build.0 = Debug|x64
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Debug|x86.ActiveCfg = Debug|Win32
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Debug|x86.Build.0 = Debug|Win32
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Release|x64.ActiveCfg = Release|x64
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Release|x64.Build.0 = Release|x64
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Release|x86.ActiveCfg = Release|Win32
+		{688265FF-9C90-41B5-96C6-AA97489819D6}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE82B6F1-B9EF-4266-9FA0-0CC2186B9214}
+	EndGlobalSection
+EndGlobal
