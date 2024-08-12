@@ -8,9 +8,20 @@ int main()
 {
 	const int width = 1920;
 	const int height = 1080;
-	const int scaledWidth = width / 4;
-	const int scaledHeight = height / 4;
-	const int bottom = scaledHeight - 1;
+
+	const int horizontalRepetitions = 16;
+	const int scaleFactor = 4;
+	const int ratio = horizontalRepetitions / scaleFactor;
+
+	const int scaledWidth = width / horizontalRepetitions;
+	const int scaledHeight = height / scaleFactor;
+
+	const int bottom = (scaledHeight - 1) * scaledWidth;
+
+	Rectangle srcRec = { 0, 0, scaledWidth * ratio, scaledHeight };
+	Rectangle dstRec = { 0, 0, width, height };
+
+	Vector2 zero = { 0, 0 };
 
 	SetConfigFlags(
 		FLAG_BORDERLESS_WINDOWED_MODE |
@@ -20,53 +31,48 @@ int main()
 		FLAG_WINDOW_MOUSE_PASSTHROUGH
 	);
 
-	InitWindow(width+1, height+1, "");
-
+	InitWindow(width-2, height-2, "hi");
+	
 	SetTargetFPS(120);
 
-	random_table* rng1 = random_table_ctor(25, 0, 1);
-	random_table* rng2 = random_table_ctor(25, -1, 1);
-	random_table* rng3 = random_table_ctor(25, -1, 2);
+	random_table* rng1 = random_table_ctor(16, 0, 1);
+	random_table* rng2 = random_table_ctor(16, -1, 1);
 	
 	int* matrix = (int*)calloc(scaledWidth * scaledHeight, sizeof(int));
 
 	Image buffer = GenImageColor(scaledWidth, scaledHeight, BLANK);
+	
 	Texture render = LoadTextureFromImage(buffer);
-	Image colorData = LoadImage("res/firetable.png");
-	
-	Color colorTable[64];
-	
-	Rectangle srcRec = { 0, 0, scaledWidth, scaledHeight };
-	Rectangle dstRec = { 0, 0, width, height };
+	SetTextureWrap(render, TEXTURE_WRAP_REPEAT);
 
-	Vector2 zero = { 0, 0 };
-	
-	int rand3;
-	
+	Image colorData = LoadImage("res/firetable.png");
+	Color colorTable[64];
 	for (int i = 0; i < 64; i++)
 	{
 		colorTable[i] = GetImageColor(colorData, i, 0);
 	}
-
 	UnloadImage(colorData);
 
+	int decay;
+	
 	while (!WindowShouldClose())
 	{
 		for (int x = 0; x < scaledWidth; x++)
 		{
-			matrix[(bottom * scaledWidth) + x] = 63;
-			for (int y = 60; y < scaledHeight; y++)
+			matrix[bottom + x] = 63;
+			for (int y = 2; y < scaledHeight; y++)
 			{
-				int pos = (y * scaledWidth) + x;
+				int pos;
+				pos = (y * scaledWidth) + x;
 				
 				if (matrix[pos] <= 0)
 					continue;
 
-				if (matrix[pos] < 58)
-					rand3 = next_value(rng1) + next_value(rng1);
+				if (matrix[pos] < 50)
+					decay = next_value(rng1) + next_value(rng1);
 
 				else
-					rand3 = next_value(rng3);
+					decay = next_value(rng1);
 					
 				int mX = x + next_value(rng2);
 				
@@ -78,9 +84,8 @@ int main()
 
 				int nextPos = ((y - next_value(rng1)) * scaledWidth) + mX;
 
-				matrix[nextPos] = Clamp(matrix[pos] - rand3, 0, 63);
+				matrix[nextPos] = Clamp(matrix[pos] - decay, 0, 63);
 				ImageDrawPixel(&buffer, x, y, colorTable[matrix[pos]]);
-
 			}
 		}
 
@@ -88,9 +93,9 @@ int main()
 
 		//Draw
 		BeginDrawing();
-		ClearBackground(BLANK);
-		DrawTexturePro(render, srcRec, dstRec, zero, 0, WHITE);
-		//DrawFPS(100, 100);
+			ClearBackground(BLANK);
+			DrawTexturePro(render, srcRec, dstRec, zero, 0, WHITE);
+			DrawFPS(100, 100);
 		EndDrawing();
 	}
 
@@ -100,8 +105,9 @@ int main()
 	free(matrix);
 	free(rng1);
 	free(rng2);
-	free(rng3);
+
 	CloseWindow();
+	
 	return 0;
 }
 

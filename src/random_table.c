@@ -1,8 +1,6 @@
 #include "random_table.h"
 #include "raylib.h"
 
-
-
 random_table* random_table_ctor(int size, int min, int max) {
     random_table* table = malloc(sizeof(*table) + sizeof(int) * size);
     
